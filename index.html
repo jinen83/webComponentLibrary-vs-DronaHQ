@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <title>Manager's Guide: Planning & Budgeting a React Component Library for Internal Tools</title>
+  <meta name="description" content="Strategic guide for managers on planning, budgeting, resourcing, and evaluating a React component library (design system) for internal tools, including TCO and alternatives like DronaHQ.">
+  <meta name="keywords" content="react component library planning, design system budget, internal tools strategy, engineering management, design system TCO, DronaHQ for managers, resource planning design system">
+  <meta property="og:title" content="Manager's Guide: Planning & Budgeting a React Component Library for Internal Tools">
+  <meta property="og:description" content="A strategic overview for managers on the benefits, roadmap, costs (3-year TCO), resources, and alternatives for building a React component library for internal applications.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yourdomain.com/manager-guide-react-component-library-internal-tools">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Manager's Guide to Planning, Budgeting, and Resourcing a React Component Library for Internal Tools",
+    "description": "Strategic insights for managers on the value, planning phases, 3-year Total Cost of Ownership (TCO), team structure, and decision-making (including alternatives like DronaHQ) for an internal React component library.",
+    "author": { "@type": "Person", "name": "Your Name" },
+    "datePublished": "2025-05-11",
+    "keywords": "react component library strategy, design system management, internal tools ROI, TCO design system, DronaHQ business case, engineering leadership"
+  }
+  </script>
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    header, main, footer { max-width: 800px; margin: auto; }
+    h1, h2, h3 { color: #222; margin-bottom: 0.5em; }
+    p { margin-bottom: 1em; }
+    /* No pre/code specific styling needed for manager's guide as code snippets are removed */
+    /* Table of Contents */
+    #toc {
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 2em;
+      border-radius: 4px;
+    }
+    #toc ul { list-style: none; }
+    #toc li + li { margin-top: 0.5em; }
+    #toc a { text-decoration: none; color: #1a73e8; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5em;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75em;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    caption {
+      caption-side: bottom;
+      font-size: 0.9em;
+      color: #666;
+      padding: 0.5em 0;
+    }
+    .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    min-height: 300px;
+    background: linear-gradient(135deg, #1a73e8 0%, #1669c1 100%);
+    color: #fff;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .hero__content {
+    position: relative;
+    max-width: 800px;
+    z-index: 1;
+    padding-top: 3rem !important;
+  }
+  
+ .hero__logo {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  max-height: 30px !important;   /* shrink logo */
+  width: auto !important;         /* keep proportions */
+  object-fit: contain !important;
+  z-index: 10 !important;
+}
+
+  .hero__content h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .hero__content p {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #fff;
+    color: #1a73e8;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .hero__cta:hover {
+    background-color: #e5e5e5;
+  }
+  
+  @media (min-width: 1200px) {
+  header,
+  nav#toc,
+  main,
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+  @media (max-width: 600px) {
+    .hero__content h1 {
+      font-size: 1.75rem;
+    }
+    .hero__content p {
+      font-size: 1rem;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <header>
+  <section class="hero">
+  <img 
+    src="https://www.dronahq.com/wp-content/uploads/2023/02/logoWhite.png" 
+    alt="DronaHQ Logo" 
+    class="hero__logo" 
+  />
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <h1>Manager’s Guide: Planning & Budgeting a Web Component Library for Internal Tools</h1>
+    <p>This guide empowers engineering leaders to build a compelling case for creating a scalable web component library that drives consistency and efficiency across internal applications.</p>
+    <a href="#budget-timelines" class="hero__cta">Get the Guide</a>
+  </div>
+</section>
+   <br>
+    <p>Understand the strategic value, planning phases, resource commitment, costs (including a 3-year TCO), and key decision points for implementing a <strong>Web component library</strong> (as part of a design system) to enhance your organization's <strong>internal tools</strong>.</p>
+  </header>
+
+  <nav id="toc">
+    <strong>Table of Contents</strong>
+    <ul>
+      <li><a href="#why-create">1. The Strategic Value of a Component Library for Internal Tools</a></li>
+      <li><a href="#roadmap">2. Strategic Roadmap for Your Component Library Initiative</a></li>
+      <li><a href="#budget-timelines">3. Budgeting, Timelines & 3-Year Total Cost of Ownership (TCO)</a></li>
+      <li><a href="#engineering-resources">4. Assembling Your Design System Team: Roles & Responsibilities</a></li>
+      <li><a href="#alternatives-comparison">5. Strategic Alternatives: Custom Build vs. Low-Code Platforms</a></li>
+      <li><a href="#conclusion">6. Conclusion: Making the Right Strategic Choice</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="why-create">
+      <h2>1. The Strategic Value of a Component Library for Internal Tools</h2>
+      <p>Investing in a <em>Web component library</em> for your <strong>internal tool design system</strong> is a strategic move to boost organizational efficiency, consistency, and developer productivity. For managers, the key benefits translate to:</p>
+      <ul>
+        <li><strong>Increased Development Velocity:</strong> Standardized, reusable components mean internal applications are built faster, freeing up engineering resources for higher-value tasks.</li>
+        <li><strong>Enhanced User Experience & Consistency:</strong> A unified look, feel, and behavior across all internal tools reduces employee training time and improves usability.</li>
+        <li><strong>Reduced Maintenance Overhead:</strong> Centralized UI logic means updates and bug fixes are made once and propagate everywhere, significantly lowering long-term maintenance costs.</li>
+        <li><strong>Improved Scalability:</strong> As your organization grows and the number of internal tools increases, a design system allows you to scale development efforts efficiently without sacrificing quality or consistency.</li>
+        <li><strong>Better Collaboration & Governance:</strong> It provides a shared language and toolkit for designers and developers, streamlining handoffs and ensuring adherence to design standards.</li>
+        <li><strong>Stronger ROI on Internal Development:</strong> Faster builds, reduced rework, and lower maintenance directly contribute to a better return on investment for your internal software development efforts.</li>
+      </ul>
+      <p>Ultimately, a well-executed component library empowers your teams to deliver better internal tools more quickly, supporting overall business objectives.</p>
+    </section>
+
+    <section id="roadmap">
+      <h2>2. Strategic Roadmap for Your Component Library Initiative</h2>
+      <p>Launching a successful <strong>Web component library</strong> and design system for internal tools is a significant product development effort. It requires careful planning and an iterative approach. The initial "Phase 0" is critical for laying the groundwork.</p>
+      
+      <p><strong>Phase 0: Discovery, Strategy & Planning (Typically 1-3 Months before dedicated Year 1 development starts)</strong></p>
+      <ul>
+        <li><strong>Define Strategic Goals & Scope:</strong> What business problems will this solve? Which internal tools are the initial targets? What are the key success metrics (e.g., X% reduction in dev time for new internal apps)?</li>
+        <li><strong>Conduct a UI Audit & Needs Analysis:</strong> Understand the current landscape of internal tools, identify inconsistencies, and prioritize common UI patterns and components.</li>
+        <li><strong>Secure Stakeholder Alignment & Buy-in:</strong> Essential for resource allocation and long-term support from engineering, product, design leadership, and key business units.</li>
+        <li><strong>Form the Core Team:</strong> Identify and allocate the initial team members (see Engineering Resources section).</li>
+        <li><strong>High-Level Technology & Tooling Decisions:</strong> Confirm the primary technology choices and key tools that will impact timelines and resources.</li>
+      </ul>
+
+      <p>Following successful completion of Phase 0, the table below outlines a potential high-level roadmap for the first year of active development (Phases 1-3), focusing on building out the core library:</p>
+
+      <table>
+        <caption>Year 1 Development Roadmap (Phases 1-3) - Manager's Overview</caption>
+        <thead>
+          <tr>
+            <th>Timeframe (Approx. within Year 1)</th>
+            <th>Primary Focus</th>
+            <th>Key Objectives & Strategic Deliverables</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Months 1-3 (Q1)</strong></td>
+            <td><strong>Foundation & Core Setup (Phase 1 Start)</strong></td>
+            <td>
+              - Establish core Design Tokens (brand alignment).<br>
+              - Deliver first set of 3-5 critical Core Components.<br>
+              - Setup initial visualization (Storybook) & testing infrastructure.<br>
+              - Draft initial Documentation & contribution guidelines.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Months 4-6 (Q2)</strong></td>
+            <td><strong>Core Completion & Early Expansion (Phase 1 End / Phase 2 Start)</strong></td>
+            <td>
+              - Complete suite of 5-10 foundational Core Components.<br>
+              - Implement basic CI/CD for library releases.<br>
+              - Begin development of initial set of More Complex Components based on priority.<br>
+              - Start refining common UI Patterns.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Months 7-9 (Q3)</strong></td>
+            <td><strong>Broader Component Expansion & Pilot Integration (Phase 2 Mid / Phase 3 Elements Start)</strong></td>
+            <td>
+              - Deliver a broader range of Complex Components.<br>
+              - Successfully integrate the library into 1-2 Pilot Internal Tool projects.<br>
+              - Enhance documentation with usage examples from pilot projects.<br>
+              - Define and implement initial Theming capabilities.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Months 10-12 (Q4)</strong></td>
+            <td><strong>Advanced Features & Initial Utility Development (Phase 2 End / Phase 3 Core for Year 1)</strong></td>
+            <td>
+              - Develop initial reusable utilities/hooks for common data interactions (supporting internal tools).<br>
+              - Implement advanced quality assurance tooling (e.g., visual regression testing).<br>
+              - Solidify and document Theming & Customization options.<br>
+              - Conduct comprehensive Accessibility review and remediation.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Phase 4: Governance, Support & Evolution (Ongoing, Post Year 1)</strong></p>
+      <p>The design system is a living product. After the initial build, sustained effort is required for:</p>
+      <ul>
+        <li><strong>Establishing a Clear Governance Model:</strong> How are new components requested, designed, built, and approved? How is versioning handled?</li>
+        <li><strong>Providing Robust Support & Driving Adoption:</strong> Actively support consuming teams, provide training, and gather feedback.</li>
+        <li><strong>Continuous Maintenance & Improvement:</strong> Allocate resources for bug fixes, updates, performance enhancements, and new features based on evolving business needs.</li>
+      </ul>
+      <p>As a manager, ensure this ongoing commitment is understood and budgeted for. The long-term success depends on this continuous nurturing.</p>
+    </section>
+
+    <section id="budget-timelines">
+      <h2>3. Budgeting, Timelines & 3-Year Total Cost of Ownership (TCO)</h2>
+      <p>Committing to a custom <strong>Web component library</strong> is a significant investment. Timelines are outlined in the <a href="#roadmap">Strategic Roadmap</a>. Initial development of a foundational library (15-25 components) can easily take 6-12+ months with a dedicated team.</p>
+      <p>The initial build cost for such a library could range from <strong>$50,000 to $250,000+ USD</strong> in the first year, primarily driven by salaries of skilled designers and engineers. However, the costs don't stop there.</p>
+      
+      <h3>Illustrative 3-Year Total Cost of Ownership (TCO)</h3>
+      <p>Understanding the TCO is crucial for long-term planning. The following table provides an *illustrative* TCO. Actual costs will vary significantly based on your team's salaries, the complexity and scope of the library, chosen tools, and the scale of adoption within your organization.</p>
+      <table>
+        <caption>Estimates are broad and depend heavily on project specifics, team location, and resource allocation. All figures in USD.</caption>
+        <thead>
+          <tr>
+            <th>Cost Category</th>
+            <th>Year 1 (Initial Build & Launch)</th>
+            <th>Year 2 (Maintenance & Expansion)</th>
+            <th>Year 3 (Maturation & Support)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Initial Development (Design & Engineering)</strong></td>
+            <td>$70,000 - $200,000+</td>
+            <td>$20,000 - $60,000 (New components, major refactors)</td>
+            <td>$15,000 - $40,000 (Minor enhancements)</td>
+          </tr>
+          <tr>
+            <td><strong>Tools & Infrastructure</strong> (Repo hosting, CI/CD, Storybook hosting, Documentation site, Private NPM if used)</td>
+            <td>$1,000 - $5,000</td>
+            <td>$1,000 - $5,000</td>
+            <td>$1,000 - $5,000</td>
+          </tr>
+          <tr>
+            <td><strong>Maintenance & Updates</strong> (Bug fixes, dependency updates, minor improvements)</td>
+            <td>$10,000 - $30,000 (Starts mid-year)</td>
+            <td>$30,000 - $80,000</td>
+            <td>$40,000 - $100,000</td>
+          </tr>
+          <tr>
+            <td><strong>Support & Training</strong> (Developer advocacy, onboarding, documentation upkeep)</td>
+            <td>$5,000 - $15,000 (Starts mid-year)</td>
+            <td>$20,000 - $50,000</td>
+            <td>$25,000 - $60,000</td>
+          </tr>
+           <tr>
+            <td><strong>Governance & Management</strong> (Team lead/PM time, planning, coordination)</td>
+            <td>$10,000 - $30,000</td>
+            <td>$15,000 - $40,000</td>
+            <td>$15,000 - $40,000</td>
+          </tr>
+          <tr>
+            <td><strong>Total Estimated Annual Cost</strong></td>
+            <td><strong>$96,000 - $280,000+</strong></td>
+            <td><strong>$86,000 - $235,000</strong></td>
+            <td><strong>$96,000 - $245,000</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Cumulative Estimated 3-Year TCO</strong></td>
+            <td colspan="3" style="text-align:center;"><strong>$278,000 - $760,000+</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>This TCO underscores that a design system is an ongoing product investment that requires continuous funding for maintenance, support, and evolution to realize its full strategic value.</p>
+    </section>
+
+    <section id="engineering-resources">
+      <h2>4. Assembling Your Design System Team: Roles & Responsibilities</h2>
+      <p>A successful <strong>Web component library</strong> and design system requires a dedicated or significantly allocated cross-functional team. As a manager, staffing this initiative appropriately is key:</p>
+      <ul>
+        <li><strong>Frontend Engineers (React/Angular Specialists):</strong> (Typically 2-4+ depending on scope)
+          <ul>
+            <li>Responsible for the core development, testing, and technical documentation of components. Must be proficient in React/Angular, TypeScript, CSS, and relevant tooling.</li>
+          </ul>
+        </li>
+        <li><strong>UI/UX Designer(s):</strong> (Typically 1-2+ dedicated or heavily involved)
+          <ul>
+            <li>Define the visual and interaction design, create component specifications, and maintain design tokens. Ensures brand alignment and usability.</li>
+          </ul>
+        </li>
+        <li><strong>QA Engineer(s):</strong> (0.5-1 dedicated or allocated)
+          <ul>
+            <li>Develop and execute test plans, including unit, integration, visual regression, and accessibility testing. Manages quality assurance.</li>
+          </ul>
+        </li>
+        <li><strong>Product Manager / Team Lead (Often a senior engineer or dedicated PM):</strong> (0.5-1)
+          <ul>
+            <li>Owns the design system roadmap, prioritizes work, liaises with stakeholders, champions adoption, and measures success. Critical for strategic alignment.</li>
+          </ul>
+        </li>
+         <li><strong>Design System Advocate / Support Engineer(s):</strong> (0.5-1+, growing with adoption)
+          <ul>
+            <li>The primary contact for teams using the library. Provides support, assists with integration, gathers feedback, develops training materials, and promotes best practices. Crucial for driving adoption and user satisfaction.</li>
+          </ul>
+        </li>
+      </ul>
+      <p>The exact team composition will depend on your organization's size and the system's scope. Ensure clear roles, responsibilities, and strong collaboration, particularly between design and engineering.</p>
+    </section>
+
+    <section id="alternatives-comparison">
+        <h2>5. Strategic Alternatives: Custom Build vs. Low-Code Platforms</h2>
+        <p>Before committing fully to building a custom <strong>Web component library</strong> from scratch, especially for common internal tool use cases, managers should strategically evaluate alternatives. Low-code development platforms often provide extensive pre-built component libraries, data connectors, and hosting, potentially offering a faster route to value.</p>
+        <p>Consider this comparison between a custom-built library and a platform like <strong>DronaHQ</strong>:</p>
+        <table>
+            <caption>Strategic Comparison: Custom Web Component Library vs. DronaHQ for Internal Tools</caption>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Custom Web Component Library</th>
+                    <th>DronaHQ (Low-Code Platform)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Time-to-Market (First Internal Tool)</strong></td>
+                    <td>Significantly Longer (Months for library + app build)</td>
+                    <td>Much Shorter (Days to Weeks; platform is ready, visual building)</td>
+                </tr>
+                <tr>
+                    <td><strong>Initial Investment Cost</strong></td>
+                    <td>High (Salaries for dedicated multi-role team, setup time)</td>
+                    <td>Low to Moderate (Subscription-based, often with trial/free tiers)</td>
+                </tr>
+                <tr>
+                    <td><strong>Ongoing Operational Cost (Maintenance, Updates, Expertise)</strong></td>
+                    <td>High (Requires ongoing dedicated team for library, plus app-specific hosting & maintenance)</td>
+                    <td>Predictable Subscription (Platform handles its own maintenance, updates, and core infrastructure)</td>
+                </tr>
+                <tr>
+                    <td><strong>Required In-House Technical Expertise (to build & maintain tools)</strong></td>
+                    <td>High (Proficient React/Angular developers for library; App developers also need frontend skills)</td>
+                    <td>Low-code skills primarily (Visual builders, SQL/JS for advanced logic). Can leverage citizen developers or reduce burden on specialized engineers.</td>
+                </tr>
+                <tr>
+                    <td><strong>UI/UX Control & Branding Flexibility</strong></td>
+                    <td>Maximum (Pixel-perfect control, unlimited customization for unique branding)</td>
+                    <td>High (Extensive pre-built UI controls, theming, custom CSS, ability to inject custom JS/web components for specific needs). Good for most internal tool branding.</td>
+                </tr>
+                <tr>
+                    <td><strong>Speed for Subsequent Internal Tools</strong></td>
+                    <td>Moderate (Reuse of library components speeds up app dev compared to from-scratch)</td>
+                    <td>Very Fast (Drag-and-drop, pre-built connectors, reusable queries/workflows accelerate new tool creation significantly)</td>
+                </tr>
+                <tr>
+                    <td><strong>Built-in Functionality (Data Connectors, User Management, etc.)</strong></td>
+                    <td>Minimal (Everything needs to be custom built or integrated individually per tool)</td>
+                    <td>Extensive (Pre-built connectors to DBs/APIs, user management, permissions, audit logs, often hosting included)</td>
+                </tr>
+                <tr>
+                    <td><strong>Focus of Engineering Resources</strong></td>
+                    <td>Significant effort on building/maintaining UI library infrastructure and components.</td>
+                    <td>Primarily on solving business problems and delivering internal tool functionality quickly.</td>
+                </tr>
+                <tr>
+                    <td><strong>Risk Profile</strong></td>
+                    <td>Higher risk (Project delays, budget overruns, adoption challenges for custom library, talent retention).</td>
+                    <td>Lower risk for common internal tools (Proven platform, faster iterations, predictable costs, vendor support).</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Strategic Considerations for Choosing a Custom Build:</strong></p>
+        <ul>
+            <li>Your internal tools have exceptionally unique, complex UI requirements that cannot be met by existing platform components, even with customization.</li>
+            <li>Your organization possesses a large, highly skilled frontend development team with available capacity and a strategic directive to own all aspects of the UI stack.</li>
+            <li>The component library itself is envisioned as a core, differentiating strategic asset for a wide array of highly distinct, business-critical applications (beyond typical operational internal tools).</li>
+            <li>Long-term budget and commitment for a dedicated design system team are secured.</li>
+        </ul>
+        <p><strong>Strategic Considerations for Choosing a Low-Code Platform (like DronaHQ):</strong></p>
+        <ul>
+            <li>Rapid delivery of functional internal tools is a top priority to meet pressing business needs.</li>
+            <li>You aim to reduce reliance on specialized frontend developers for common internal applications and potentially empower a wider range of technical or semi-technical staff.</li>
+            <li>Standardizing internal tool development on a single platform to improve consistency, reduce "shadow IT," and simplify maintenance is a goal.</li>
+            <li>Cost-effectiveness, faster ROI, and redirecting valuable engineering resources from building UI plumbing to solving core business logic are key drivers.</li>
+            <li>Many internal tools share common patterns (CRUD interfaces, dashboards, simple workflows) that are well-served by platform capabilities.</li>
+        </ul>
+    </section>
+
+    <section id="conclusion">
+      <h2>6. Conclusion: Making the Right Strategic Choice</h2>
+      <p>Investing in a robust system for building internal tools is a critical decision. A custom <strong>Web component library</strong> offers unparalleled control and can be a powerful asset, but it comes with significant upfront and ongoing costs in terms of time, money, and dedicated resources, as highlighted by the 3-year TCO.</p>
+      <p>Managers must weigh these substantial commitments against the strategic goals. For many organizations, particularly when the objective is to rapidly and cost-effectively deliver consistent and functional internal applications, exploring alternatives like low-code platforms (e.g., <strong>DronaHQ</strong>) is a prudent step. These platforms can provide a significant portion of the benefits of a design system—reusable components, consistency, faster development—at a potentially much lower TCO and with a faster time-to-value, especially for common internal tool patterns.</p>
+      <p>The optimal path depends on your organization's specific context, resources, technical maturity, the complexity of your internal tool requirements, and your long-term strategic objectives for internal application development. A thorough evaluation of build vs. buy, considering the full lifecycle costs and benefits, will lead to the most effective decision for your team and business.</p>
+    </section>
+  </main>
+
+  <footer style="text-align:center; margin-top:2em;">
+   <a href="https://dronahq.com/signup?ref=jd-webCompLib">Get started with 30 day free trial of DronaHQ</a>
+  </footer>
+
+  <script>
+    // No JS needed for copy buttons as code snippets are removed.
+  </script>
+
+</body>
+</html>
